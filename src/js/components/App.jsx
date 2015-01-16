@@ -18,7 +18,9 @@ var App = React.createClass({
     _onChange: function () {
         this.setState(getUsersState());
     },
-
+    _onCreateClick: function () {
+        ActionCreator.createUser(prompt("Enter name for new user"));
+    },
     getInitialState: function () {
         return getUsersState();
     },
@@ -36,10 +38,10 @@ var App = React.createClass({
             <div>
                 <h3>User List</h3>
                 <div style={{width: '300px'}}>
-                    <Search />
+                    <Search /><br />
                     <List items={this.state.allUsers} />
                     <Counter entity={'users'} count={this.state.allUsers.length} />
-                    <button id="new-user" className={"btn btn-primary pull-right"}>New User</button>
+                    <button id="new-user" className={"btn btn-primary pull-right"} onClick={this._onCreateClick}>New User</button>
                 </div>
             </div>
         );

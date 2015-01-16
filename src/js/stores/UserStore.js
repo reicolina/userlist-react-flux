@@ -6,9 +6,9 @@ var assign = require('object-assign');
 
 // hardcoding initial users
 var _users = [
-        {name: "Bob", phone: "555-666-7777"},
-        {name: "Ted", phone: "666-999-0000"},
-        {name: "Luis", phone: "111-222-3333"}
+        {id: "1", name: "Bob", phone: "555-666-7777"},
+        {id: "2", name: "Ted", phone: "666-999-0000"},
+        {id: "3", name: "Luis", phone: "111-222-3333"}
     ];
 
 var _searchText = '';
@@ -22,11 +22,7 @@ function create(name, phone) {
     // server-side storage.
     // Using the current timestamp + random number in place of a real id.
     var id = (+new Date() + Math.floor(Math.random() * 999999)).toString(36);
-    _users[id] = {
-        id: id,
-        name: name,
-        phone: phone
-    };
+    _users.push({id: id, name: name, phone: phone});
 }
 
 /**

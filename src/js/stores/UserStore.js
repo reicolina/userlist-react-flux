@@ -40,7 +40,12 @@ function update(id, updates) {
  * @param  {string} id
  */
 function destroy(id) {
-    delete _users[id];
+    var i;
+    for (i = 0; i < _users.length; i++) {
+        if (id === _users[i].id) {
+            _users.splice(i, 1);
+        }
+    }
 }
 
 var UserStore = merge(EventEmitter.prototype, {

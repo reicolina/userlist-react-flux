@@ -5,6 +5,7 @@ var UserStore = require('../stores/UserStore');
 var ActionCreator = require('../actions/UserActionCreators');
 var Search = require('../components/Search.jsx');
 var List = require('../components/List.jsx');
+var Counter = require('../components/Counter.jsx');
 
 function getUsersState() {
     return {
@@ -37,6 +38,7 @@ var App = React.createClass({
                 <div style={{width: '300px'}}>
                     <Search />
                     <List items={this.state.allUsers} />
+                    <Counter entity={'users'} count={this.state.allUsers.length} />
                     <button id="new-user" className={"btn btn-primary pull-right"}>New User</button>
                 </div>
             </div>

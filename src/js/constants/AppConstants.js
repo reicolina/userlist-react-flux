@@ -9,9 +9,7 @@ module.exports = {
         UPDATE_NAME: null,
         UPDATE_PHONE: null,
         UPDATE_SEARCH_TEXT: null,
-        DESTROY: null,
-        UPDATE_TITLE: null,
-        RECEIVE_DATA: null
+        DESTROY: null
     }),
 
     ActionSources: keyMirror({

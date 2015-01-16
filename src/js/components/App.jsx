@@ -1,45 +1,47 @@
 /*** @jsx React.DOM */
 
 var React = require('react');
-var DataStore = require('../stores/DataStore');
-var ActionCreator = require('../actions/DataActionCreators');
+var UserStore = require('../stores/UserStore');
+var ActionCreator = require('../actions/UserActionCreators');
+var Search = require('../components/Search.jsx');
+var List = require('../components/List.jsx');
+
+function getUsersState() {
+    return {
+        allUsers: UserStore.getAll()
+    };
+}
 
 var App = React.createClass({
 
-  _onChange: function() {
-    this.setState(DataStore.getAll());
-  },
+    _onChange: function () {
+        this.setState(getUsersState());
+    },
 
-  _onButtonClick: function(e) {
-    var newTitle = prompt('Enter new title:');
-    if (newTitle) {
-      ActionCreator.updateTitle(newTitle);
+    getInitialState: function () {
+        return getUsersState();
+    },
+
+    componentDidMount: function () {
+        UserStore.addChangeListener(this._onChange);
+    },
+
+    componentWillUnmount: function () {
+        UserStore.removeChangeListener(this._onChange);
+    },
+
+    render: function () {
+        return (
+            <div>
+                <h3>User List</h3>
+                <div style={{width: '300px'}}>
+                    <Search />
+                    <List items={this.state.allUsers} />
+                    <button id="new-user" className={"btn btn-primary pull-right"}>New User</button>
+                </div>
+            </div>
+        );
     }
-  },
-
-  getInitialState: function() {
-    var data = DataStore.getAll();
-    return {
-      title: data.title || "My User List"
-    }
-  },
-
-  componentDidMount: function() {
-    DataStore.addChangeListener(this._onChange);
-  },
-
-  componentWillUnmount: function() {
-    DataStore.removeChangeListener(this._onChange);
-  },
-
-  render: function() {
-    return (
-      <div>
-        <h1>Hello, welcome to {this.state.title}!</h1>
-        <button onClick={this._onButtonClick}>Update Title</button>
-      </div>
-    );
-  }
 
 });
 
